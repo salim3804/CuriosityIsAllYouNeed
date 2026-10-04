@@ -1,0 +1,26 @@
+Déploiement — CuriosityIsAllYouNeed
+
+1. Décompresser le ZIP et déposer tout son CONTENU à la racine du dépôt
+   salim3804/CuriosityIsAllYouNeed. index.html doit être à la racine.
+2. Inclure le fichier .nojekyll (il peut être masqué par votre ordinateur).
+3. GitHub : Settings > Pages > Deploy from a branch > main > / (root) > Save.
+4. Adresse attendue : https://salim3804.github.io/CuriosityIsAllYouNeed/
+
+La marque SR-IT et les contenus sont conservés. Le nom du dépôt ne change
+pas le nom affiché de votre entreprise.
+
+Adaptations : URL des aperçus de partage des deux articles corrigées,
+chemins des formulaires rendus relatifs, .nojekyll ajouté.
+Le site et le diagnostic local sont utilisables sur GitHub Pages.
+GitHub Pages ne traite pas les formulaires POST et ne fournit pas de SMTP.
+Un message explicite est affiché si vous tentez d'y envoyer un formulaire.
+Aucun email n'est envoyé automatiquement sur GitHub Pages avec ce ZIP.
+
+Les formulaires Netlify existants sont conservés. Pour recevoir leurs
+soumissions : héberger ce dépôt sur Netlify, activer la détection des
+formulaires, redéployer et configurer les notifications email.
+Voir NETLIFY-FORMS-README.txt. Cette notification au propriétaire n'envoie
+pas automatiquement le diagnostic au visiteur.
+Pour cet envoi, prévoir un service serveur et ses identifiants SMTP privés.
+
+Version allégée : les images incorporées ont été extraites et dédupliquées, sans perte de qualité.
