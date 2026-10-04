@@ -2380,7 +2380,7 @@ header.topbar .nav{margin-left:auto}
       <p class="lead">Automatisez ce qui peut l’être. Accélérez ce qui compte.<br><br>SR-IT vous aide à identifier les tâches chronophages, prioriser les bons cas d’usage et déployer des solutions IA concrètes pour votre entreprise.</p>
       <p class="lead"><strong>Parlons de votre activité — 1h offerte</strong></p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary" id="openCallback" aria-haspopup="dialog" aria-controls="callbackDialog">Une question sur l’IA ? — On vous rappelle</button>
+        <button type="button" class="btn btn-primary" id="openCallback" aria-controls="callbackCard">Une question sur l’IA ? — On vous rappelle</button>
         <a href="#offre" class="btn btn-secondary">Découvrir l’offre</a>
       </div>
       <div class="hero-proofline">
@@ -2395,61 +2395,20 @@ header.topbar .nav{margin-left:auto}
 </div>
     </div>
     
-<div class="hero-contact">
-  <h3>Parlons de votre cas d’usage</h3>
-  <form  method="POST" name="contact-srit" data-netlify="true" action="./"><input type="hidden" name="form-name" value="contact-srit">
-
-    <div class="contact-grid">
-      <div>
-        <label>Prénom *</label>
-        <input name="prenom" required>
-      </div>
-      <div>
-        <label>Nom *</label>
-        <input name="nom" required>
-      </div>
-      <div>
-        <label>Email professionnel *</label>
-        <input type="email" name="email" required>
-      </div>
-      <div>
-        <label>Téléphone</label>
-        <input name="telephone" placeholder="06 12 34 56 78">
-      </div>
-      <div class="full">
-        <label>Entreprise</label>
-        <input name="entreprise" placeholder="Nom de votre entreprise">
-      </div>
-      <div class="full">
-        <label>Sujet</label>
-        <select name="objet">
-          <option>Diagnostic IA</option>
-          <option>Audit IA</option>
-          <option>Formation IA</option>
-          <option>Automatisation / Assistant IA</option>
-          <option>Demande de rendez-vous</option>
-          <option>Autre</option>
-        </select>
-      </div>
-      <div class="full">
-        <label>Votre message</label>
-        <textarea name="message" placeholder="Décrivez brièvement votre besoin..."></textarea>
-      </div>
-    </div>
-
-    <div class="submit-row">
-      <button class="btn btn-primary" type="submit" style="flex:1">Envoyer ma demande</button>
-      <a class="btn btn-secondary" href="#diagnostic">Faire le diagnostic IA</a>
-    </div>
-
-    <div class="quick-links">
-      <a href="tel:+33618293927">☎ 06 18 29 39 27</a>
-      <a href="mailto:salim.mechehar@gmail.com?subject=Demande%20de%20rendez-vous%20SR-IT">Prendre rendez-vous</a>
-    </div>
-
-    <div id="contactStatus" class="form-status" aria-live="polite"></div><div class="micro">Premier échange sans engagement · Réponse rapide · Visio, téléphone ou sur site</div>
-  </form>
-</div>
+<div class="hero-contact callback-card" id="callbackCard" aria-labelledby="callbackTitle">
+<h2 id="callbackTitle">Une question sur l’IA ? On vous rappelle</h2>
+<p>Laissez vos coordonnées et indiquez l’heure à laquelle vous souhaitez être rappelé.</p>
+<form name="rappel-audit-srit" method="POST" data-netlify="true" action="./" data-netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="rappel-audit-srit">
+<p hidden><label>Ne pas remplir <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<label for="callbackNom">Nom *</label><input id="callbackNom" name="nom" autocomplete="family-name" required maxlength="100">
+<label for="callbackPrenom">Prénom *</label><input id="callbackPrenom" name="prenom" autocomplete="given-name" required maxlength="100">
+<label for="callbackTel">Numéro de téléphone *</label><input id="callbackTel" name="telephone" type="tel" autocomplete="tel" required maxlength="30">
+<label for="callbackHeure">Heure souhaitée pour être rappelé *</label><input id="callbackHeure" name="heure_rappel" type="time" required>
+<p class="callback-privacy">Vos coordonnées seront utilisées pour répondre à votre demande de rappel. Horaire souhaité, sous réserve de disponibilité.</p>
+<button type="submit" class="btn btn-primary">Demander mon rappel</button>
+<div id="callbackStatus" role="status" aria-live="polite"></div>
+</form></div>
   </div>
 </section>
 
@@ -2467,7 +2426,7 @@ header.topbar .nav{margin-left:auto}
     </ul>
     <div class="client-trust-action">
       <div><strong>Et si on simplifiait votre quotidien ?</strong><p>En 30 minutes, faisons le point sur vos tâches chronophages et les premières pistes pour gagner du temps.</p></div>
-      <button type="button" class="btn btn-primary" data-open-callback aria-haspopup="dialog" aria-controls="callbackDialog">Une question sur l’IA ? — On vous rappelle</button>
+      <button type="button" class="btn btn-primary" data-open-callback aria-controls="callbackCard">Une question sur l’IA ? — On vous rappelle</button>
     </div>
   </div>
 </section>
@@ -3568,34 +3527,51 @@ console.info("SR-IT Netlify Forms: contact-srit + diagnostic-srit-2 loaded.");
 </script>
 
 <style>
-#callbackDialog{width:min(460px,calc(100% - 32px));max-height:calc(100dvh - 40px);overflow:auto;border:0;border-radius:20px;padding:28px;color:#102746;background:white;box-shadow:0 24px 80px #0004}
-#callbackDialog::backdrop{background:rgba(8,25,48,.65)}
-#callbackDialog h2{margin:0 34px 10px 0;font-size:24px;line-height:1.2}
-#callbackDialog p{font-size:14px;line-height:1.5}
-#callbackDialog label{display:block;font-weight:700;font-size:14px;margin-top:16px}
-#callbackDialog input:not([type=hidden]){box-sizing:border-box;width:100%;padding:12px;margin-top:6px;border:1px solid #bdcde0;border-radius:8px;font:inherit;background:#fff;color:#102746}
-#callbackDialog .callback-close{position:absolute;right:14px;top:10px;border:0;background:transparent;font-size:30px;cursor:pointer;color:#102746}
-#callbackDialog .btn{margin-top:20px;width:100%;cursor:pointer}
-#callbackDialog .callback-privacy{color:#51657e;font-size:12px}
-#callbackStatus{margin-top:12px;font-size:14px}
+.callback-card h2{margin:0 0 12px;font-size:26px;line-height:1.2;color:var(--ink)}
+.callback-card p{font-size:14px;line-height:1.5;color:var(--ink-soft)}
+.callback-card label{display:block;font-weight:700;font-size:14px;margin-top:16px}
+.callback-card input:not([type=hidden]){width:100%;padding:12px;margin-top:6px;border:1px solid #bdcde0;border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+.callback-card .btn{margin-top:20px;width:100%;cursor:pointer}
+.callback-card .callback-privacy{color:#51657e;font-size:12px}
+#callbackCard{scroll-margin-top:calc(var(--site-header-height,100px) + 24px)}
+#callbackStatus{margin-top:12px;font-size:14px;color:var(--ink)}
+#callbackStatus a{color:var(--blue);font-weight:700}
+@media(max-width:600px){.callback-card h2{font-size:24px}}
 </style>
-<dialog id="callbackDialog" aria-labelledby="callbackTitle">
-<button type="button" class="callback-close" aria-label="Fermer le formulaire">×</button>
-<h2 id="callbackTitle">Une question sur l’IA ? On vous rappelle</h2>
-<p>Laissez vos coordonnées et indiquez l’heure à laquelle vous souhaitez être rappelé.</p>
-<form name="rappel-audit-srit" method="POST" data-netlify="true" action="/" data-netlify-honeypot="bot-field">
-<input type="hidden" name="form-name" value="rappel-audit-srit">
-<p hidden><label>Ne pas remplir <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-<label for="callbackNom">Nom *</label><input id="callbackNom" name="nom" autocomplete="family-name" required maxlength="100">
-<label for="callbackPrenom">Prénom *</label><input id="callbackPrenom" name="prenom" autocomplete="given-name" required maxlength="100">
-<label for="callbackTel">Numéro de téléphone *</label><input id="callbackTel" name="telephone" type="tel" autocomplete="tel" required maxlength="30">
-<label for="callbackHeure">Heure souhaitée pour être rappelé *</label><input id="callbackHeure" name="heure_rappel" type="time" required>
-<p class="callback-privacy">Vos coordonnées seront utilisées pour répondre à votre demande de rappel. Horaire souhaité, sous réserve de disponibilité.</p>
-<button type="submit" class="btn btn-primary">Demander mon rappel</button>
-<div id="callbackStatus" role="status" aria-live="polite"></div>
-</form></dialog>
+
 <script id="callback-script">
-(()=>{const dialog=document.getElementById('callbackDialog'),form=dialog.querySelector('form'),status=document.getElementById('callbackStatus'),opener=document.getElementById('openCallback');opener.addEventListener('click',()=>dialog.showModal());document.querySelectorAll('[data-open-callback]').forEach(button=>button.addEventListener('click',()=>dialog.showModal()));dialog.querySelector('.callback-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;const button=form.querySelector('[type=submit]');button.disabled=true;status.textContent='Envoi en cours…';try{const response=await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});if(!response.ok)throw new Error('HTTP '+response.status);status.textContent='Merci ! Votre demande de rappel a bien été enregistrée.';form.reset();}catch(error){status.textContent='L’envoi n’a pas abouti. Réessayez ou contactez salim.mechehar@gmail.com.';}finally{button.disabled=false;}});})();
+(()=>{
+const card=document.getElementById('callbackCard');
+if(!card)return;
+const form=card.querySelector('form'),status=document.getElementById('callbackStatus');
+document.querySelectorAll('#openCallback,[data-open-callback]').forEach(button=>{
+button.addEventListener('click',()=>{
+card.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
+document.getElementById('callbackNom').focus({preventScroll:true});
+});
+});
+form.addEventListener('submit',async e=>{
+e.preventDefault();
+if(!form.reportValidity())return;
+const button=form.querySelector('[type=submit]');
+button.disabled=true;
+status.textContent='Envoi en cours…';
+try{
+if(location.hostname.endsWith('.github.io'))throw new Error('GITHUB_PAGES_NO_FORM_BACKEND');
+const response=await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+if(!response.ok)throw new Error('HTTP '+response.status);
+status.textContent='Merci ! Votre demande de rappel a bien été enregistrée.';
+form.reset();
+}catch(error){
+status.textContent=error.message==='GITHUB_PAGES_NO_FORM_BACKEND'?'Pour transmettre votre demande, envoyez-la par email : ':'L’envoi n’a pas abouti. Vous pouvez transmettre votre demande par email : ';
+const data=new FormData(form),link=document.createElement('a');
+const body='Nom : '+data.get('nom')+'\nPrénom : '+data.get('prenom')+'\nTéléphone : '+data.get('telephone')+'\nHeure souhaitée : '+data.get('heure_rappel');
+link.href='mailto:salim.mechehar@gmail.com?subject='+encodeURIComponent('Demande de rappel SR-IT')+'&body='+encodeURIComponent(body);
+link.textContent='Envoyer ma demande par email';
+status.appendChild(link);
+}finally{button.disabled=false;}
+});
+})();
 </script>
 
 </body>
