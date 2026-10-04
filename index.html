@@ -2397,7 +2397,7 @@ header.topbar .nav{margin-left:auto}
     
 <div class="hero-contact callback-card" id="callbackCard" aria-labelledby="callbackTitle">
 <h2 id="callbackTitle">Une question sur l’IA ? On vous rappelle</h2>
-<p>Laissez vos coordonnées et indiquez l’heure à laquelle vous souhaitez être rappelé.</p>
+<p>Laissez vos coordonnées et choisissez l’heure de votre rappel. La date est préremplie pour aujourd’hui et peut être modifiée.</p>
 <form name="rappel-audit-srit" method="POST" action="https://formsubmit.co/salim.mechehar@gmail.com">
 <input type="hidden" name="_subject" value="SR-IT — Nouvelle demande de rappel">
 <input type="hidden" name="_template" value="table">
@@ -2406,6 +2406,7 @@ header.topbar .nav{margin-left:auto}
 <label for="callbackNom">Nom *</label><input id="callbackNom" name="nom" autocomplete="family-name" required maxlength="100">
 <label for="callbackPrenom">Prénom *</label><input id="callbackPrenom" name="prenom" autocomplete="given-name" required maxlength="100">
 <label for="callbackTel">Numéro de téléphone *</label><input id="callbackTel" name="telephone" type="tel" autocomplete="tel" required maxlength="30">
+<label for="callbackDate">Date souhaitée pour être rappelé *</label><input id="callbackDate" name="date_rappel" type="date" required>
 <label for="callbackHeure">Heure souhaitée pour être rappelé *</label><input id="callbackHeure" name="heure_rappel" type="time" required>
 <p class="callback-privacy">Vos coordonnées seront transmises via FormSubmit pour répondre à votre demande de rappel. Horaire souhaité, sous réserve de disponibilité.</p>
 <button type="submit" class="btn btn-primary">Demander mon rappel</button>
@@ -3546,6 +3547,14 @@ console.info("SR-IT Netlify Forms: contact-srit + diagnostic-srit-2 loaded.");
 const card=document.getElementById('callbackCard');
 if(!card)return;
 const form=card.querySelector('form'),status=document.getElementById('callbackStatus');
+const dateInput=document.getElementById('callbackDate');
+function setToday(){
+const now=new Date();
+const today=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');
+dateInput.defaultValue=today;
+dateInput.value=today;
+}
+setToday();
 document.querySelectorAll('#openCallback,[data-open-callback]').forEach(button=>{
 button.addEventListener('click',()=>{
 card.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
@@ -3566,6 +3575,7 @@ const payload={
 'Nom':String(data.get('nom')||'').trim(),
 'Prénom':String(data.get('prenom')||'').trim(),
 'Téléphone':String(data.get('telephone')||'').trim(),
+'Date souhaitée pour le rappel':data.get('date_rappel'),
 'Heure souhaitée pour le rappel':data.get('heure_rappel'),
 '_subject':'SR-IT — Nouvelle demande de rappel',
 '_template':'table',
@@ -3585,6 +3595,7 @@ status.textContent='Votre demande a été transmise. Le service de rappel est en
 }else{
 status.textContent='Merci ! Votre demande de rappel a bien été transmise.';
 form.reset();
+setToday();
 }
 }catch(error){
 status.textContent='L’envoi n’a pas abouti. Vos informations sont conservées : réessayez ou appelez le 06 18 29 39 27.';
