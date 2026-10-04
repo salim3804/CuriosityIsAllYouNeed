@@ -3548,13 +3548,18 @@ const card=document.getElementById('callbackCard');
 if(!card)return;
 const form=card.querySelector('form'),status=document.getElementById('callbackStatus');
 const dateInput=document.getElementById('callbackDate');
-function setToday(){
-const now=new Date();
-const today=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');
-dateInput.defaultValue=today;
-dateInput.value=today;
+const timeInput=document.getElementById('callbackHeure');
+function setDefaultCallback(){
+const nextHour=new Date();
+nextHour.setHours(nextHour.getHours()+1,0,0,0);
+const date=[nextHour.getFullYear(),String(nextHour.getMonth()+1).padStart(2,'0'),String(nextHour.getDate()).padStart(2,'0')].join('-');
+const time=String(nextHour.getHours()).padStart(2,'0')+':00';
+dateInput.defaultValue=date;
+dateInput.value=date;
+timeInput.defaultValue=time;
+timeInput.value=time;
 }
-setToday();
+setDefaultCallback();
 document.querySelectorAll('#openCallback,[data-open-callback]').forEach(button=>{
 button.addEventListener('click',()=>{
 card.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
@@ -3589,13 +3594,13 @@ body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)
 });
 if(!response.ok)throw new Error('HTTP '+response.status);
 const result=await response.json();
-if(result.success!==true && result.success!=='true')throw new Error('SUBMISSION_FAILED');
-if(/activat|confirm/i.test(result.message||'')){
-status.textContent='Votre demande a été transmise. Le service de rappel est en cours d’activation.';
+if(/activat/i.test(result.message||'')){
+status.textContent='Le service de rappel est en cours d’activation. Votre demande est en attente ; vous pouvez nous joindre au 06 18 29 39 27.';
 }else{
+if(result.success!==true && result.success!=='true')throw new Error('SUBMISSION_FAILED');
 status.textContent='Merci ! Votre demande de rappel a bien été transmise.';
 form.reset();
-setToday();
+setDefaultCallback();
 }
 }catch(error){
 status.textContent='L’envoi n’a pas abouti. Vos informations sont conservées : réessayez ou appelez le 06 18 29 39 27.';
