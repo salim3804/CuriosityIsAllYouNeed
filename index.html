@@ -2330,17 +2330,19 @@ header.topbar .nav{margin-left:auto}
 .client-trust-head{text-align:center;max-width:720px;margin:0 auto 26px}
 .client-trust h2{color:#102d50;font-size:clamp(28px,4vw,40px);letter-spacing:-.025em;margin:0 0 12px}
 .client-trust-head p{color:#58708f;font-size:17px;line-height:1.65;margin:0}
-.client-logos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;padding:0;margin:0}
+.client-logos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;padding:0;margin:0}
 .client-logos li{min-width:0;background:white;border:1px solid #e1e9f2;border-radius:18px;height:174px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .client-logos img{display:block;width:85%;height:130px;object-fit:contain}
 .client-logos .client-tce{width:155px;height:155px}
-.client-logos .client-taysir{width:100%;height:170px;object-fit:cover}
+.client-logos .client-taysir{width:100%;height:170px;object-fit:contain}
 .client-trust-action{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:24px;padding:24px 28px;background:#102d50;border-radius:18px;color:white}
 .client-trust-action strong{display:block;font-size:22px;margin-bottom:6px}
 .client-trust-action p{margin:0;color:#d7e4ff;line-height:1.6}
 .client-trust-action .btn{flex-shrink:0}
+@media(min-width:651px) and (max-width:1000px){.client-logos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.client-logos{grid-template-columns:1fr;gap:12px}.client-logos li{height:150px}.client-logos img{max-width:280px}.client-trust-action{flex-direction:column;align-items:stretch;text-align:center;padding:24px}.client-trust-action .btn{white-space:normal}}
 </style>
+<style>#openCallback,[data-open-callback]{white-space:normal;max-width:100%;text-align:center}</style>
 </head>
 <body>
 
@@ -2378,7 +2380,7 @@ header.topbar .nav{margin-left:auto}
       <p class="lead">Automatisez ce qui peut l’être. Accélérez ce qui compte.<br><br>SR-IT vous aide à identifier les tâches chronophages, prioriser les bons cas d’usage et déployer des solutions IA concrètes pour votre entreprise.</p>
       <p class="lead"><strong>Parlons de votre activité — 1h offerte</strong></p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary" id="openCallback" aria-haspopup="dialog" aria-controls="callbackDialog">Audit gratuit - 30 min</button>
+        <button type="button" class="btn btn-primary" id="openCallback" aria-haspopup="dialog" aria-controls="callbackDialog">Une question sur l’IA ? — On vous rappelle</button>
         <a href="#offre" class="btn btn-secondary">Découvrir l’offre</a>
       </div>
       <div class="hero-proofline">
@@ -2458,13 +2460,14 @@ header.topbar .nav{margin-left:auto}
       <p>Chaque entreprise a ses défis. Notre point de départ : comprendre les vôtres pour construire des solutions utiles à votre activité.</p>
     </div>
     <ul class="client-logos" aria-label="Nos références">
+      <li><img src="assets/client-metalec.jpg" alt="Metalec" width="300" height="76" loading="lazy"></li>
       <li><img src="assets/client-iso-ecolo.webp" alt="Iso’Ecolo" width="709" height="266" loading="lazy"></li>
       <li><img class="client-tce" src="assets/client-tce-services.png" alt="TCE Services" width="1254" height="1254" loading="lazy"></li>
       <li><img class="client-taysir" src="assets/client-taysir.png" alt="Taysir" width="1774" height="887" loading="lazy"></li>
     </ul>
     <div class="client-trust-action">
       <div><strong>Et si on simplifiait votre quotidien ?</strong><p>En 30 minutes, faisons le point sur vos tâches chronophages et les premières pistes pour gagner du temps.</p></div>
-      <button type="button" class="btn btn-primary" data-open-callback aria-haspopup="dialog" aria-controls="callbackDialog">Audit gratuit - 30 min</button>
+      <button type="button" class="btn btn-primary" data-open-callback aria-haspopup="dialog" aria-controls="callbackDialog">Une question sur l’IA ? — On vous rappelle</button>
     </div>
   </div>
 </section>
@@ -3578,7 +3581,7 @@ console.info("SR-IT Netlify Forms: contact-srit + diagnostic-srit-2 loaded.");
 </style>
 <dialog id="callbackDialog" aria-labelledby="callbackTitle">
 <button type="button" class="callback-close" aria-label="Fermer le formulaire">×</button>
-<h2 id="callbackTitle">Audit gratuit – 30 min</h2>
+<h2 id="callbackTitle">Une question sur l’IA ? On vous rappelle</h2>
 <p>Laissez vos coordonnées et indiquez l’heure à laquelle vous souhaitez être rappelé.</p>
 <form name="rappel-audit-srit" method="POST" data-netlify="true" action="/" data-netlify-honeypot="bot-field">
 <input type="hidden" name="form-name" value="rappel-audit-srit">
